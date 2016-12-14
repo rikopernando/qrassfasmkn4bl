@@ -7,6 +7,7 @@
     include 'db.php';
 
 ///coba
+//coba comentt
     $perintah = $db->query("SELECT * FROM barang WHERE kategori = 'Bahan' ORDER BY id DESC");
 
 
