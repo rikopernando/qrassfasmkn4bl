@@ -6,7 +6,7 @@
     include 'sanitasi.php';
     include 'db.php';
 
-
+///coba
     $perintah = $db->query("SELECT * FROM barang WHERE kategori = 'Bahan' ORDER BY id DESC");
 
 
