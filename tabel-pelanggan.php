@@ -15,13 +15,14 @@ $query = $db->query("SELECT * FROM pelanggan");
 <table id="tableuser" class="table table-bordered">
 		<thead>
 			
-			<th style='background-color: #4CAF50; color: white'> Kode Pelanggan </th>
-			<th style='background-color: #4CAF50; color: white'> Nama Pelanggan </th>
-			<th style='background-color: #4CAF50; color: white'> Level Harga </th>
+			<th style='background-color: #4CAF50; color: white'> No Rek </th>
+			<th style='background-color: #4CAF50; color: white'> Nama Nasabah </th>
+			<th style='background-color: #4CAF50; color: white'> Kelas </th>
 			<th style='background-color: #4CAF50; color: white'> Tgl. Lahir </th>
 			<th style='background-color: #4CAF50; color: white'> Nomor Telp </th>
 			<th style='background-color: #4CAF50; color: white'> E-mail </th>
 			<th style='background-color: #4CAF50; color: white'> Wilayah</th>
+			<th style='background-color: #4CAF50; color: white'> Jurusan</th>
 
 <?php 
 
@@ -61,6 +62,9 @@ $pelanggan_edit = mysqli_num_rows($pilih_akses_pelanggan_edit);
 			//menyimpan data sementara yang ada pada $query
 			while ($data = mysqli_fetch_array($query))
 			{
+
+		$select_jurusan = $db->query("SELECT nama FROM jurusan WHERE id = '$data[jurusan]'");
+        $taked = mysqli_fetch_array($select_jurusan);
 				//menampilkan data
 			echo "<tr>
 			
@@ -70,7 +74,8 @@ $pelanggan_edit = mysqli_num_rows($pilih_akses_pelanggan_edit);
 			<td>". tanggal($data['tgl_lahir']) ."</td>
 			<td>". $data['no_telp'] ."</td>
 			<td>". $data['e_mail'] ."</td>
-			<td>". $data['wilayah'] ."</td>";
+			<td>". $data['wilayah'] ."</td>
+			<td>". $taked['nama'] ."</td>";
 			
 
 
@@ -94,7 +99,7 @@ $pelanggan_edit = mysqli_num_rows($pilih_akses_pelanggan_edit);
 
 
     if ($pelanggan_edit > 0){
-			echo "<td> <button class='btn btn-info btn-edit' data-pelanggan='". $data['nama_pelanggan'] ."' data-kode='". $data['kode_pelanggan'] ."' data-tanggal='". $data['tgl_lahir'] ."' data-nomor='". $data['no_telp'] ."' data-email='". $data['e_mail'] ."' data-wilayah='". $data['wilayah'] ."' data-level-harga='". $data['level_harga'] ."' data-id='". $data['id'] ."'> <span class='glyphicon glyphicon-edit'> </span> Edit </button> </td>";
+			echo "<td> <button class='btn btn-info btn-edit' data-pelanggan='". $data['nama_pelanggan'] ."' data-kode='". $data['kode_pelanggan'] ."' data-tanggal='". $data['tgl_lahir'] ."' data-nomor='". $data['no_telp'] ."' data-email='". $data['e_mail'] ."' data-wilayah='". $data['wilayah'] ."' data-jurusan='". $data['jurusan'] ."' data-level-harga='". $data['level_harga'] ."' data-id='". $data['id'] ."'> <span class='glyphicon glyphicon-edit'> </span> Edit </button> </td>";
 		}
 
 			echo"</tr>";
@@ -160,6 +165,8 @@ mysqli_close($db);
 								var email   = $(this).attr("data-email");
 								var wilayah = $(this).attr("data-wilayah");
 								var id   = $(this).attr("data-id");
+								var jurusan = $(this).attr("data-jurusan");
+
 								$("#edit_nama").val(nama);
 								$("#edit_kode").val(kode);
 								$("#edit_tgl_lahir").val(tanggal);
@@ -167,7 +174,8 @@ mysqli_close($db);
 								$("#edit_email").val(email);
 								$("#edit_wilayah").val(wilayah);
 								$("#id_edit").val(id);
-								
+								$("#edit_jurusan").val(jurusan);
+
 								
 								});
 
@@ -177,8 +185,6 @@ mysqli_close($db);
 								});
 								
 								});
-								
-								
 								
 								
 								function tutupalert() {

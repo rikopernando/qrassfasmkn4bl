@@ -74,15 +74,27 @@ $pelanggan = mysqli_num_rows($pilih_akses_pelanggan);
 
 					<label> Kelas </label><br>
 					<select type="text" name="level_harga" id="level_harga" class="form-control" required="" >
-
 					<option value="">--SILAKAN PILIH--</option>
-					<option>Kelas 1</option>
-					<option>Kelas 2</option>
-					<option>Kelas 3</option>
-
-
+					<option>Kelas X</option>
+					<option>Kelas XI</option>
+					<option>Kelas XII</option>
 					</select>
-					
+
+				
+				<label> Jurusan </label><br>
+				<select  type="text" name="jurusan" id="jurusan" class="form-control"
+				required="">
+				<option value="Tidak Ada">Tidak Ada</option>
+          			<?php 
+          			 $jurme = $db->query("SELECT id,nama FROM jurusan");
+          			 while($outin = mysqli_fetch_array($jurme))
+          			 {
+          			 echo "<option value='".$outin['id']."'>".$outin['nama'] ."</option>";
+          			 }
+          			?>
+          		</select>
+          		
+
 					<br>
 					<button type="submit" id="submit_tambah" class="btn btn-success">Submit</button>
 
@@ -232,21 +244,28 @@ $pelanggan = mysqli_num_rows($pilih_akses_pelanggan);
 
 					<label> Kelas </label><br>
 					<select type="text" name="edit_level_harga" id="edit_level_harga" class="form-control" required="" >
-
-					<option value="">--SILAKAN PILIH--</option>
-					<option>Kelas 1</option>
-					<option>Kelas 2</option>
-					<option>Kelas 3</option>
-
-
+					<option>Kelas X</option>
+					<option>Kelas XI</option>
+					<option>Kelas XII</option>
 					</select>
 					
 
-    			    <input type="hidden" class="form-control" id="id_edit">
+				<label> Jurusan </label><br>
+				<select  type="text" name="edit_jurusan" id="edit_jurusan" class="form-control"
+				required="">
+				<option value="Tidak Ada">Tidak Ada</option>
+          			<?php 
+          			 $jurme = $db->query("SELECT id,nama FROM jurusan");
+          			 while($outin = mysqli_fetch_array($jurme))
+          			 {
+          			 echo "<option value='".$outin['id']."'>".$outin['nama'] ."</option>";
+          			 }
+          			?>
+          		</select>
+
+    			<input type="hidden" class="form-control" id="id_edit">
     
    </div>
-   
-   
    					<button type="submit" id="submit_edit" class="btn btn-success">Submit</button>
    					</div>
   </form>
@@ -285,7 +304,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 			<th style='background-color: #4CAF50; color: white'> Nomor Telp </th>
 			<th style='background-color: #4CAF50; color: white'> E-mail </th>
 			<th style='background-color: #4CAF50; color: white'> Wilayah</th>
-
+			<th style='background-color: #4CAF50; color: white'> Jurusan</th>
 <?php 
 
 include 'db.php';
@@ -325,6 +344,9 @@ $pelanggan_edit = mysqli_num_rows($pilih_akses_pelanggan_edit);
 			while ($data = mysqli_fetch_array($query))
 			{
 				//menampilkan data
+		$select_jurusan = $db->query("SELECT nama FROM jurusan WHERE id = '$data[jurusan]'");
+        $taked = mysqli_fetch_array($select_jurusan);
+
 			echo "<tr>
 			
 			<td>". $data['kode_pelanggan'] ."</td>
@@ -333,7 +355,8 @@ $pelanggan_edit = mysqli_num_rows($pilih_akses_pelanggan_edit);
 			<td>". tanggal($data['tgl_lahir']) ."</td>
 			<td>". $data['no_telp'] ."</td>
 			<td>". $data['e_mail'] ."</td>
-			<td>". $data['wilayah'] ."</td>";
+			<td>". $data['wilayah'] ."</td>
+			<td>". $taked['nama'] ."</td>";
 			
 
 
@@ -357,7 +380,7 @@ $pelanggan_edit = mysqli_num_rows($pilih_akses_pelanggan_edit);
 
 
     if ($pelanggan_edit > 0){
-			echo "<td> <button class='btn btn-info btn-edit' data-pelanggan='". $data['nama_pelanggan'] ."' data-kode='". $data['kode_pelanggan'] ."' data-tanggal='". $data['tgl_lahir'] ."' data-nomor='". $data['no_telp'] ."' data-email='". $data['e_mail'] ."' data-wilayah='". $data['wilayah'] ."' data-level-harga='". $data['level_harga'] ."' data-id='". $data['id'] ."'> <span class='glyphicon glyphicon-edit'> </span> Edit </button> </td>";
+			echo "<td> <button class='btn btn-info btn-edit' data-pelanggan='". $data['nama_pelanggan'] ."' data-kode='". $data['kode_pelanggan'] ."' data-tanggal='". $data['tgl_lahir'] ."' data-nomor='". $data['no_telp'] ."' data-email='". $data['e_mail'] ."' data-wilayah='". $data['wilayah'] ."' data-level-harga='". $data['level_harga'] ."' data-jurusan='". $data['jurusan'] ."' data-id='". $data['id'] ."'> <span class='glyphicon glyphicon-edit'> </span> Edit </button> </td>";
 		}
 
 			echo"</tr>";
@@ -387,6 +410,7 @@ mysqli_close($db);
 	$( "#edit_tgl_lahir" ).pickadate({ selectYears: 80, format: 'yyyy-mm-dd'});
 	});
 	</script>
+
 
 
 <script>
@@ -437,8 +461,9 @@ $(document).ready(function(){
 								var no_telp = $("#nomor").val();
 								var e_mail = $("#email").val();
 								var tgl_lahir = $("#tgl_lahir").val();
-								var wilayah = $("#wilayah").val();
-																
+								var wilayah = $("#wilayah").val();	
+								var jurusan = $("#jurusan").val();	
+
 								if (kode_pelanggan == "") {
 
 									alert("Kode Pelanggan Harus Diisi");
@@ -453,13 +478,18 @@ $(document).ready(function(){
 
 									alert("Wilayah Harus Diisi");
 								}
+								else if (jurusan == "") {
+
+									alert("jurusan Harus Diisi");
+								}
+
 
 								else if (level_harga == "") {
 
 									alert("Level Harga Harus Dipilih");
 								}
 								else {								
-									$.post('prosespelanggan.php', {kode_pelanggan:kode_pelanggan,nama_pelanggan:nama_pelanggan,level_harga:level_harga,no_telp:no_telp,e_mail:e_mail,tgl_lahir:tgl_lahir,wilayah:wilayah}, function(data){
+									$.post('prosespelanggan.php', {jurusan:jurusan,kode_pelanggan:kode_pelanggan,nama_pelanggan:nama_pelanggan,level_harga:level_harga,no_telp:no_telp,e_mail:e_mail,tgl_lahir:tgl_lahir,wilayah:wilayah}, function(data){
 								
 								if (data != "") {
 								$("#kode_pelanggan").val('');
@@ -535,6 +565,8 @@ $(document).ready(function(){
 								var wilayah = $(this).attr("data-wilayah");
 								var level_harga = $(this).attr("data-level-harga");
 								var id   = $(this).attr("data-id");
+								var jurusan = $(this).attr("data-jurusan");
+
 								$("#edit_nama").val(nama);
 								$("#edit_kode").val(kode);
 								$("#edit_tgl_lahir").val(tanggal);
@@ -543,6 +575,7 @@ $(document).ready(function(){
 								$("#edit_wilayah").val(wilayah);
 								$("#edit_level_harga").val(level_harga);
 								$("#id_edit").val(id);
+								$("#edit_jurusan").val(jurusan);
 								
 								
 								});
@@ -555,6 +588,7 @@ $(document).ready(function(){
 								var email = $("#edit_email").val();
 								var wilayah = $("#edit_wilayah").val();
 								var level_harga = $("#edit_level_harga").val();
+								var jurusan = $("#edit_jurusan").val();
 								var id   = $("#id_edit").val();
 
 								if (nama == ""){
@@ -578,7 +612,7 @@ $(document).ready(function(){
 									alert("Level Harga Harus Dipilih");
 								}
 								else {
-								$.post("update_pelanggan.php",{nama_pelanggan:nama,kode_pelanggan:kode,no_telp:nomor,tgl_lahir:tanggal,e_mail:email,wilayah:wilayah,level_harga:level_harga,id:id},function(data){
+								$.post("update_pelanggan.php",{jurusan:jurusan,nama_pelanggan:nama,kode_pelanggan:kode,no_telp:nomor,tgl_lahir:tanggal,e_mail:email,wilayah:wilayah,level_harga:level_harga,id:id},function(data){
 
 								
 
