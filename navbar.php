@@ -83,6 +83,9 @@ if ($lihat['user_lihat'] > 0){
                                 echo '<li><a href="user.php" class="waves-effect">User</a></li>';
 }
 
+echo"<li><a href=jurusan.php class='waves-effect'>Jurusan</a></li>";
+
+
 if ($lihat['jabatan_lihat'] > 0){                               
                                 echo '<li><a href="jabatan.php" class="waves-effect">Jabatan</a></li>';
 }
