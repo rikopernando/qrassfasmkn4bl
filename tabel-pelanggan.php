@@ -99,7 +99,7 @@ $pelanggan_edit = mysqli_num_rows($pilih_akses_pelanggan_edit);
 
 
     if ($pelanggan_edit > 0){
-			echo "<td> <button class='btn btn-info btn-edit' data-pelanggan='". $data['nama_pelanggan'] ."' data-kode='". $data['kode_pelanggan'] ."' data-tanggal='". $data['tgl_lahir'] ."' data-nomor='". $data['no_telp'] ."' data-email='". $data['e_mail'] ."' data-wilayah='". $data['wilayah'] ."' data-level-harga='". $data['level_harga'] ."' data-id='". $data['id'] ."'> <span class='glyphicon glyphicon-edit'> </span> Edit </button> </td>";
+			echo "<td> <button class='btn btn-info btn-edit' data-pelanggan='". $data['nama_pelanggan'] ."' data-kode='". $data['kode_pelanggan'] ."' data-tanggal='". $data['tgl_lahir'] ."' data-nomor='". $data['no_telp'] ."' data-email='". $data['e_mail'] ."' data-wilayah='". $data['wilayah'] ."' data-jurusan='". $data['jurusan'] ."' data-level-harga='". $data['level_harga'] ."' data-id='". $data['id'] ."'> <span class='glyphicon glyphicon-edit'> </span> Edit </button> </td>";
 		}
 
 			echo"</tr>";
@@ -165,6 +165,8 @@ mysqli_close($db);
 								var email   = $(this).attr("data-email");
 								var wilayah = $(this).attr("data-wilayah");
 								var id   = $(this).attr("data-id");
+								var jurusan = $(this).attr("data-jurusan");
+
 								$("#edit_nama").val(nama);
 								$("#edit_kode").val(kode);
 								$("#edit_tgl_lahir").val(tanggal);
@@ -172,7 +174,8 @@ mysqli_close($db);
 								$("#edit_email").val(email);
 								$("#edit_wilayah").val(wilayah);
 								$("#id_edit").val(id);
-								
+								$("#edit_jurusan").val(jurusan);
+
 								
 								});
 
@@ -182,8 +185,6 @@ mysqli_close($db);
 								});
 								
 								});
-								
-								
 								
 								
 								function tutupalert() {
