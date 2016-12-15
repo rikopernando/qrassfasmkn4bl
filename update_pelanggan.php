@@ -11,13 +11,13 @@ $tgl_lahir = stringdoang($_POST['tgl_lahir']);
 $no_telp = stringdoang($_POST['no_telp']);
 $e_mail = stringdoang($_POST['e_mail']);
 $wilayah = stringdoang($_POST['wilayah']);
+$jurusan = stringdoang($_POST['jurusan']);
 
 
+$query = $db->prepare("UPDATE pelanggan SET kode_pelanggan = ?, nama_pelanggan = ?, no_telp = ?, e_mail = ?, tgl_lahir = ?, wilayah = ? , level_harga = ?, jurusan = ? WHERE id = ?");
 
-$query = $db->prepare("UPDATE pelanggan SET kode_pelanggan = ?, nama_pelanggan = ?, no_telp = ?, e_mail = ?, tgl_lahir = ?, wilayah = ? , level_harga = ? WHERE id = ?");
-
-$query->bind_param("ssssssss",
-	$kode_pelanggan, $nama_pelanggan, $no_telp, $e_mail, $tgl_lahir, $wilayah, $level_harga, $id);
+$query->bind_param("sssssssss",
+	$kode_pelanggan, $nama_pelanggan, $no_telp, $e_mail, $tgl_lahir, $wilayah, $level_harga, $jurusan, $id);
 
 $query->execute();
 

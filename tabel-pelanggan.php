@@ -15,13 +15,14 @@ $query = $db->query("SELECT * FROM pelanggan");
 <table id="tableuser" class="table table-bordered">
 		<thead>
 			
-			<th style='background-color: #4CAF50; color: white'> Kode Pelanggan </th>
-			<th style='background-color: #4CAF50; color: white'> Nama Pelanggan </th>
-			<th style='background-color: #4CAF50; color: white'> Level Harga </th>
+			<th style='background-color: #4CAF50; color: white'> No Rek </th>
+			<th style='background-color: #4CAF50; color: white'> Nama Nasabah </th>
+			<th style='background-color: #4CAF50; color: white'> Kelas </th>
 			<th style='background-color: #4CAF50; color: white'> Tgl. Lahir </th>
 			<th style='background-color: #4CAF50; color: white'> Nomor Telp </th>
 			<th style='background-color: #4CAF50; color: white'> E-mail </th>
 			<th style='background-color: #4CAF50; color: white'> Wilayah</th>
+			<th style='background-color: #4CAF50; color: white'> Jurusan</th>
 
 <?php 
 
@@ -61,6 +62,9 @@ $pelanggan_edit = mysqli_num_rows($pilih_akses_pelanggan_edit);
 			//menyimpan data sementara yang ada pada $query
 			while ($data = mysqli_fetch_array($query))
 			{
+
+		$select_jurusan = $db->query("SELECT nama FROM jurusan WHERE id = '$data[jurusan]'");
+        $taked = mysqli_fetch_array($select_jurusan);
 				//menampilkan data
 			echo "<tr>
 			
@@ -70,7 +74,8 @@ $pelanggan_edit = mysqli_num_rows($pilih_akses_pelanggan_edit);
 			<td>". tanggal($data['tgl_lahir']) ."</td>
 			<td>". $data['no_telp'] ."</td>
 			<td>". $data['e_mail'] ."</td>
-			<td>". $data['wilayah'] ."</td>";
+			<td>". $data['wilayah'] ."</td>
+			<td>". $taked['nama'] ."</td>";
 			
 
 
