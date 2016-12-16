@@ -15,8 +15,11 @@ $columns = array(
 	5 => 'user',
 	6 => 'petugas_edit',
 	7 => 'tanggal_edit',
-	8 => 'jam_edit',
-	9 => 'id'
+	8 => 'cetak',
+	9=> 'detal',
+	10=> 'edit',
+	11=> 'hapus',
+	12=> 'id'
 
 );
 

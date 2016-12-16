@@ -8,9 +8,6 @@ include 'sanitasi.php';
 include 'db.php';
 
 
-//menampilkan seluruh data yang ada pada tabel pembelian dalan DB
-$perintah = $db->query("SELECT km.petugas_edit,km.tanggal_edit,km.jam_edit,km.id, km.no_faktur, km.keterangan, km.ke_akun, km.jumlah, km.tanggal, km.jam, km.user, da.nama_daftar_akun FROM penyetoran km INNER JOIN daftar_akun da ON km.ke_akun = da.kode_daftar_akun");
-
  ?>
 
 <style>
@@ -216,7 +213,7 @@ if ($kas_masuk['kas_masuk_hapus'] > 0) {
             }
           },
               "fnCreatedRow": function( nRow, aData, iDataIndex ) {
-              $(nRow).attr('class','tr-id-'+aData[13]+'');
+              $(nRow).attr('class','tr-id-'+aData[12]+'');
             },
         } );
       } );

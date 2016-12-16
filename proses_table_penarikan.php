@@ -1,5 +1,8 @@
 <?php include 'session_login.php';
 /* Database connection start */
+include 'sanitasi.php';
+
+
 include 'db.php';
 
 /* Database connection end */
@@ -16,23 +19,26 @@ $columns = array(
 	3 => 'tanggal',
 	4=> 'jam',
 	5 => 'user',
-	6=> 'cetak',
-	7=> 'detail',
-	8 => 'edit',
-	9 => 'hapus',
-	10 => 'id'	
+	6=> 'petugas_edit',
+	7 => 'waktu_edit',
+	8=> 'cetak',
+	9=> 'detail',
+	10 => 'edit',
+	11 => 'hapus',
+	12 => 'id'	
+
 
 );
 
 // getting total number records without any search
-$sql = "SELECT km.id, km.no_faktur, km.keterangan, km.dari_akun, km.jumlah, km.tanggal, km.jam, km.user, da.nama_daftar_akun";
+$sql = "SELECT km.user_edit,km.waktu_edit,km.id, km.no_faktur, km.keterangan, km.dari_akun, km.jumlah, km.tanggal, km.jam, km.user, da.nama_daftar_akun";
 $sql.=" FROM penarikan km INNER JOIN daftar_akun da ON km.dari_akun = da.kode_daftar_akun";
 $query = mysqli_query($conn, $sql) or die("eror 1");
 $totalData = mysqli_num_rows($query);
 $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
 
 
-$sql = "SELECT km.id, km.no_faktur, km.keterangan, km.dari_akun, km.jumlah, km.tanggal, km.jam, km.user, da.nama_daftar_akun";
+$sql = "SELECT km.user_edit,km.waktu_edit,km.id, km.no_faktur, km.keterangan, km.dari_akun, km.jumlah, km.tanggal, km.jam, km.user, da.nama_daftar_akun";
 $sql.=" FROM penarikan km INNER JOIN daftar_akun da ON km.dari_akun = da.kode_daftar_akun"; 
 $sql.=" WHERE 1=1 ";
 
@@ -41,6 +47,8 @@ if( !empty($requestData['search']['value']) ) {   // if there is a search parame
 	$sql.=" OR da.nama_daftar_akun LIKE '".$requestData['search']['value']."%' ";
 	$sql.=" OR km.jumlah LIKE '".$requestData['search']['value']."%' ";
 	$sql.=" OR km.tanggal LIKE '".$requestData['search']['value']."%' ";
+	$sql.=" OR km.user_edit LIKE '".$requestData['search']['value']."%' ";
+	$sql.=" OR km.waktu_edit LIKE '".$requestData['search']['value']."%' ";
 	$sql.=" OR km.user LIKE '".$requestData['search']['value']."%' )";
 }
 
@@ -60,10 +68,13 @@ while( $row=mysqli_fetch_array($query) ) {  // preparing an array
 	
 			$nestedData[] = $row["no_faktur"];
 			$nestedData[] = $row["nama_daftar_akun"];
-			$nestedData[] = $row["jumlah"];
+			$nestedData[] = rp($row["jumlah"]);
 			$nestedData[] = $row["tanggal"];
 			$nestedData[] = $row["jam"];
 			$nestedData[] = $row["user"];	
+			$nestedData[] = $row["user_edit"];
+			$nestedData[] = $row["waktu_edit"];
+	
 
 $pilih_akses_kas_keluar = $db->query("SELECT * FROM otoritas_kas_keluar WHERE id_otoritas = '$_SESSION[otoritas_id]'");
 $kas_keluar = mysqli_fetch_array($pilih_akses_kas_keluar);
