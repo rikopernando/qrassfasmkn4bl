@@ -155,6 +155,8 @@ echo '<a href="form_penarikan.php"  class="btn btn-info"><i class="fa fa-plus"><
 			<th style='background-color: #4CAF50; color:white'> Tanggal </th>
 			<th style='background-color: #4CAF50; color:white'> Jam </th>
 			<th style='background-color: #4CAF50; color:white'> User </th>
+			<th style='background-color: #4CAF50; color:white'> Petugas Edit </th>
+			<th style='background-color: #4CAF50; color:white'> Waktu Edit </th>
 			<th style='background-color: #4CAF50; color:white'> Cetak </th>
 			<th style='background-color: #4CAF50; color:white'> Detail </th>
 
@@ -186,7 +188,6 @@ if ($kas_keluar['kas_keluar_hapus'] > 0) {
 		<span id="demo"> </span>
 </div><!--end of container-->
 
-
 <script type="text/javascript">
 	
 
@@ -206,7 +207,7 @@ if ($kas_keluar['kas_keluar_hapus'] > 0) {
             }
           },
               "fnCreatedRow": function( nRow, aData, iDataIndex ) {
-              $(nRow).attr('class','tr-id-'+aData[10]+'');
+              $(nRow).attr('class','tr-id-'+aData[12]+'');
     },
  } );
           } );

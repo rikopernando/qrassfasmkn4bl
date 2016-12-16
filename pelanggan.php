@@ -305,6 +305,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 			<th style='background-color: #4CAF50; color: white'> E-mail </th>
 			<th style='background-color: #4CAF50; color: white'> Wilayah</th>
 			<th style='background-color: #4CAF50; color: white'> Jurusan</th>
+			<th style='background-color: #4CAF50; color: white'> Saldo</th>
 <?php 
 
 include 'db.php';
@@ -347,6 +348,14 @@ $pelanggan_edit = mysqli_num_rows($pilih_akses_pelanggan_edit);
 		$select_jurusan = $db->query("SELECT nama FROM jurusan WHERE id = '$data[jurusan]'");
         $taked = mysqli_fetch_array($select_jurusan);
 
+$select = $db->query("SELECT SUM(jumlah) AS total_tabungan FROM detail_penyetoran WHERE dari_akun = '$data[id]' ");
+$jumlah = mysqli_fetch_array($select);
+
+$select1 = $db->query("SELECT SUM(jumlah) AS total_tabungan1 FROM detail_penarikan WHERE ke_akun = '$data[id]' ");
+$jumlah1 = mysqli_fetch_array($select1);
+
+
+ $total = $jumlah['total_tabungan'] - $jumlah1['total_tabungan1'];
 			echo "<tr>
 			
 			<td>". $data['kode_pelanggan'] ."</td>
@@ -356,7 +365,8 @@ $pelanggan_edit = mysqli_num_rows($pilih_akses_pelanggan_edit);
 			<td>". $data['no_telp'] ."</td>
 			<td>". $data['e_mail'] ."</td>
 			<td>". $data['wilayah'] ."</td>
-			<td>". $taked['nama'] ."</td>";
+			<td>". $taked['nama'] ."</td>
+			<td>".rp($total)."</td>";
 			
 
 
