@@ -13,23 +13,26 @@ $tahun_terakhir = substr($tahun_sekarang, 2);
 $tanggal = stringdoang($_POST['tanggal']);
 $waktu = $tanggal." ".$jam_sekarang;
 //mengirim data sesuai dengan variabel denagn metode POST 
-
-
-
-// buat prepared statements
-    $stmt = $db->prepare("INSERT INTO tbs_penarikan (session_id,keterangan,dari_akun,ke_akun,jumlah,tanggal,jam,user) VALUES (?,?,?,?,?,?,?,?)");
-
-// hubungkan "data" dengan prepared statements
-        $stmt->bind_param("ssssisss", 
-        $session_id, $keterangan, $dari_akun, $ke_akun, $jumlah, $tanggal, $jam_sekarang, $user);        
-        
-// siapkan "data" query
-        
         $keterangan = stringdoang($_POST['keterangan']);
         $dari_akun = stringdoang($_POST['dari_akun']);
         $ke_akun = stringdoang($_POST['ke_akun']);
         $jumlah = angkadoang($_POST['jumlah']);
         $user = $_SESSION['user_name'];
+
+$select = $db->query("SELECT jurusan FROM pelanggan WHERE id = '$ke_akun'");
+$out = mysqli_fetch_array($select);
+$jurusan = $out['jurusan'];
+
+// buat prepared statements
+$stmt = $db->prepare("INSERT INTO tbs_penarikan (session_id,keterangan,dari_akun,
+      ke_akun,jumlah,tanggal,jam,user,jurusan) VALUES (?,?,?,?,?,?,?,?,?)");
+
+// hubungkan "data" dengan prepared statements
+$stmt->bind_param("ssssissss", 
+$session_id, $keterangan, $dari_akun, $ke_akun, $jumlah, $tanggal, $jam_sekarang, $user, $jurusan);        
+        
+// siapkan "data" query
+        
 
 // jalankan query
         $stmt->execute();

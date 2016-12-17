@@ -104,7 +104,7 @@ return $baru;
 function tanggal($tanggal){
 
  $date= date_create($tanggal);
- $date_format =  date_format($date,"d/m/Y");
+ $date_format =  date_format($date,"d-m-Y");
  return $date_format;
 }
 
