@@ -103,12 +103,20 @@ $kas_edit = mysqli_fetch_array($pilih_akses_kas_edit);
       <td>". $data['nama_daftar_akun'] ."</td>";
 
             
-// MENCARI JUMLAH KAS
-            $query0 = $db->query("SELECT SUM(debit) - SUM(kredit) AS total_kas FROM jurnal_trans WHERE kode_akun_jurnal = '$data[kode_daftar_akun]'");
-            $cek0 = mysqli_fetch_array($query0);
-            $total_kas = $cek0['total_kas'];
+// perhitungan uang
+$select = $db->query("SELECT SUM(jumlah) AS total_tabungan FROM detail_penyetoran WHERE ke_akun = '$data[kode_daftar_akun]' ");
+$jumlah = mysqli_fetch_array($select);
 
-            echo "<td>". rp($total_kas) ."</td>";
+$select1 = $db->query("SELECT SUM(jumlah) AS total_tabungan1 FROM detail_penarikan WHERE dari_akun = '$data[kode_daftar_akun]' ");
+$jumlah1 = mysqli_fetch_array($select1);
+
+
+$total = $jumlah['total_tabungan'] - $jumlah1['total_tabungan1'];
+// perhitungan uang
+
+
+            echo "<td>". rp($total) ."</td>";
+
             $sett_akun = $db->query("SELECT kas FROM setting_akun");
             $data_sett = mysqli_fetch_array($sett_akun);
             
