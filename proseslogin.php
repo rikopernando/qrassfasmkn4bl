@@ -47,13 +47,41 @@
                 
     else 
         {
+
+            $asc = $db->query("SELECT * FROM pelanggan WHERE kode_pelanggan = '$username' ");
+            $esc = mysqli_num_rows($asc);
+            $nasabah = mysqli_fetch_array($asc);
+
+            if ($esc == 1)
+           {
+                $passwordku = $nasabah['password'];
+
+                if (password_verify($password,$passwordku)) 
+                {
+                echo "Mohon Tunggu...";
+                $_SESSION['kode_pelanggan'] = $username;
+                $_SESSION['nama_pelanggan'] = $nama;
+                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=laporan_tabungan_rekening.php">';
+                
+                }
+                else
+                {
+                echo "<center> <h2> Password Yang Anda Masukan Salah !! <br>
+                <a href='index.php'> KEMBALI </a> </h2> </center>";
+                }
+            }
+            else
+            {
                 echo "<center> <h2> Username Yang Anda Masukan Salah !! <br>
                
                 <a href='index.php'> KEMBALI </a> </h2> </center>";
+            }
+
+
         }
         
         
 //Untuk Memutuskan Koneksi Ke Database
 mysqli_close($db);   
 
-?>
+?> 

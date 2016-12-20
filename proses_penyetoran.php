@@ -95,7 +95,7 @@ else {
 
     while ($data=mysqli_fetch_array($query1)) {
 
-    $query2 = $db->query("INSERT INTO detail_penyetoran (no_faktur,keterangan,dari_akun,ke_akun,jumlah,tanggal,jam,user) VALUES ('$no_faktur','$data[keterangan]','$data[dari_akun]','$data[ke_akun]','$data[jumlah]','$data[tanggal]','$data[jam]','$data[user]')");
+    $query2 = $db->query("INSERT INTO detail_penyetoran (no_faktur,keterangan,dari_akun,ke_akun,jumlah,tanggal,jam,user,waktu ) VALUES ('$no_faktur','$data[keterangan]','$data[dari_akun]','$data[ke_akun]','$data[jumlah]','$data[tanggal]','$data[jam]','$data[user]','$waktu')");
     
     }
 

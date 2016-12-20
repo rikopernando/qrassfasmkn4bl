@@ -426,7 +426,7 @@ if ($lihat['laporan_lihat'] > 0){
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link"><i class="fa fa-user"></i> <span class="hidden-sm-down">
-                    <?php echo $_SESSION['nama'];?></span>
+                    <?php echo $_SESSION['nama_pelanggan'];?></span>
                     </a>
 
                 </li>
