@@ -99,7 +99,7 @@ if ($lihat['suplier_lihat'] > 0){
 }
 */
 if ($lihat['pelanggan_lihat'] > 0){
-                                echo '<li><a href="pelanggan.php" class="waves-effect">Pelanggan</a></li>';
+                                echo '<li><a href="pelanggan.php" class="waves-effect">Nasabah</a></li>';
 }
 /*
 if ($lihat['item_lihat'] > 0){

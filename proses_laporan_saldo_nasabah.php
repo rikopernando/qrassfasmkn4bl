@@ -1,4 +1,4 @@
-<?php include 'session_login.php';
+<?php 
 /* Database connection start */
 include 'sanitasi.php';
 include 'db.php';

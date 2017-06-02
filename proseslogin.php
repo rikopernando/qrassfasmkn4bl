@@ -60,8 +60,10 @@
                 {
                 echo "Mohon Tunggu...";
                 $_SESSION['kode_pelanggan'] = $username;
-                $_SESSION['nama_pelanggan'] = $nama;
-                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=laporan_tabungan_rekening.php">';
+                $_SESSION['nama_pelanggan'] = $nasabah['nama_pelanggan'];
+                $_SESSION['id_pelanggan'] = $nasabah['id'];
+
+                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=laporan_tabungan_nasabah.php">';
                 
                 }
                 else

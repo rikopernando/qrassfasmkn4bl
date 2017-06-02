@@ -294,7 +294,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 
 <div class="table-responsive"><!-- membuat agar ada garis pada tabel, disetiap kolom -->
 <span id="table_baru">
-<table id="tableuser" class="table table-bordered">
+<table id="tableuser" class="table table-bordered table-sm">
 		<thead>
 			
 			<th style='background-color: #4CAF50; color: white'> No Rekening </th>
@@ -406,6 +406,11 @@ mysqli_close($db);
 	</span>
 
 </div>
+
+
+   <i><p style="color:red;"> * Note :Untuk Login dengan nasabah</p><p>- Username : No Rekening <br>- Password : 1234 </p></i>
+
+
 </div> <!--end of container-->
 
 

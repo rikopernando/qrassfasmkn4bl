@@ -96,7 +96,7 @@ $jumlah1 = mysqli_fetch_array($select1);
 </style>
 <br><br>
 
-<table id="tableuser" class="table table-bordered">
+<table id="tableuser" class="table table-bordered table-sm">
     <thead>
        
       <th> Tanggal </th>
@@ -179,7 +179,7 @@ mysqli_close($db);
 
     <div class="row">
       <div class="col-sm-6">
-              <font class="satu"><b>Petugas <br><br><br><br> <font class="satu"><?php echo $_SESSION['nama']; ?></font></b></font> 
+              <font class="satu"><b>Nasabah <br><br><br><br> <font class="satu"><?php echo $_SESSION['nama_pelanggan']; ?></font></b></font> 
       </div>
          <div class="col-sm-3">
 
@@ -193,7 +193,7 @@ mysqli_close($db);
           <label style="height: 25px; width:90%; font-size:20px;"> Total Saldo</label>
             <b><input type="text" style="height: 25px; width:90%; font-size:20px;" class="form-control" id="total_saldo" autocomplete="off" name="total_saldo" readonly="" value="<?php echo rp($total_saldo) ?>"></b>
         
-        <i><b><font class="satu">Terbilang :</font></b> <?php echo kekata($total); ?> rupiah</i><br>
+        <i><b><font class="satu">Terbilang :</font></b> <?php echo kekata($total); ?> rupiah </i><br>
 
         </div> <!--/ col-sm-6-->
     </div>
