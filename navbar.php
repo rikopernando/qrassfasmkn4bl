@@ -270,7 +270,7 @@ if ($lihat['retur_lihat'] > 0){
                         </div>
                     </li>';
 }
-*/
+
  if ($lihat['akuntansi_lihat'] > 0){
                 echo '<li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-balance-scale"></i> Akuntansi <i class="fa fa-angle-down rotate-icon"></i></a>
                         <div class="collapsible-body">
@@ -307,17 +307,14 @@ if ($lihat['akuntansi_lihat'] > 0){
                         </div>
                     </li>';
 }
-
+*/
  if ($lihat['laporan_lihat'] > 0){
                 echo '<li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-book"></i> Laporan <i class="fa fa-angle-down rotate-icon"></i></a>
                         <div class="collapsible-body">
                             <ul>';
 }
 
-echo"<li><a href=laporan_tabungan_rekening.php class='waves-effect'>Rekening</a></li>";
-
-echo"<li><a href=laporan_tabungan_jurusan.php class='waves-effect'>Jurusan</a></li>";
-
+echo"<li><a href=laporan_tabungan_rekening.php class='waves-effect'>Saldo Nasabah</a></li>";
 /*
  if ($lihat['laporan_penjualan_lihat'] > 0){
                             echo '<li><a href="lap_penjualan.php" class="waves-effect">Lap. Penjualan</a></li>';
@@ -370,10 +367,11 @@ if ($lihat['laporan_lihat'] > 0){
                     </li>';
 }
 
-
+/*
  if ($lihat['kas_lihat'] > 0){
                 echo '<li><a href="kas.php" class="waves-effect"> <i class="fa fa-money"></i> Posisi Kas </a></li>';
 }
+*/
 ?>
                 <li><a href="https://www.andaglos.com" class="waves-effect"> <i class="fa fa-envelope"></i> Contact Us </a></li>
                     
